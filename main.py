@@ -13,7 +13,7 @@ def admin_login(username, password):
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
-    response = requests.request("POST", url, data=payload, headers=headers)
+    response = requests.request("POST", url, data=payload, headers=headers, verify=False)
     if response.status_code == 200:
         return response.json()["access_token"]
     print(response.status_code, response.text)
@@ -29,7 +29,7 @@ def upload_json(json_string, admin_token):
         "Authorization": f"Bearer {admin_token}",
     }
 
-    response = requests.request("POST", url, json=payload, headers=headers)
+    response = requests.request("POST", url, json=payload, headers=headers, verify=False)
     if response.status_code == 201:
         return True
     print(response.status_code, response.text)
@@ -43,7 +43,7 @@ def realm_exists(realm, admin_token):
     headers = {
         "Authorization": f"Bearer {admin_token}"
     }
-    response = requests.request("GET", url, data=payload, headers=headers)
+    response = requests.request("GET", url, data=payload, headers=headers, verify=False)
     return not ("error" in response.json() and response.status_code == 404)
 
 

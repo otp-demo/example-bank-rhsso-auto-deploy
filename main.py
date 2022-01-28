@@ -53,10 +53,10 @@ def read_json(filename):
 
 
 def main():
-    realm = os.environ.get('RHSSO_REALM')
+    realm = os.environ.get('RHSSO_BANK_REALM')
     user = os.environ.get('RHSSO_ADMIN_USER')
     password = os.environ.get('RHSSO_ADMIN_PASSWORD')
-    print(realm, user, password)
+    print(realm, user, password, BASE_URL)
 
     json_path = "realm-export.json"
     token = admin_login(user, password)

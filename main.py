@@ -44,10 +44,9 @@ def read_json(filename):
 
 
 def main():
-    realm = os.environ.get('RHSSO_BANK_REALM')
     user = os.environ.get('RHSSO_ADMIN_USER')
     password = os.environ.get('RHSSO_ADMIN_PASSWORD')
-    print(realm, user, password, BASE_URL)
+    print(f"Connecting to {BASE_URL}...")
 
     json_path = "realm-export.json"
     token = admin_login(user, password)
@@ -55,6 +54,7 @@ def main():
     if not token:
         print("Unable to login as admin user. Aborting...", file=sys.stderr)
         return 1
+    print("Logged in as admin user...")
 
     json = read_json(json_path)
     if not upload_json(json, token):
